@@ -8,8 +8,8 @@ pipeline {
     stages {
         stage('Install & Build') { 
             steps {
-                sh 'npm install' 
-                sh 'npm run build' 
+                sh 'yarn install' 
+                sh 'yarn build' 
             }
         }
         stage('build & push docker image') {
