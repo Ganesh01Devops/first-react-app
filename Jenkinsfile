@@ -16,8 +16,8 @@ pipeline {
 	         steps {
               withDockerRegistry(credentialsId: 'DOCKER_HUB_LOGIN', url: 'https://index.docker.io/v1/') {
                     sh script: 'cd  $WORKSPACE'
-                    sh script: 'docker build --file Dockerfile --tag docker.io/ganesh01devops/firstReactApp:$BUILD_NUMBER .'
-                    sh script: 'docker push docker.io/ganesh01devops/firstReactApp:$BUILD_NUMBER'
+                    sh script: 'docker build --file Dockerfile --tag docker.io/ganesh01devops/first-react-app:$BUILD_NUMBER .'
+                    sh script: 'docker push docker.io/ganesh01devops/first-react-app:$BUILD_NUMBER'
               }	
            }		
         }
