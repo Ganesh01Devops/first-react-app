@@ -7,10 +7,10 @@
             echo "deleteing previous application deployment"
             kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep firstReactApp`
             echo "creating new application deployment"
-            kubectl create deployment firstReactApp --image=ganesh01devops/samplejavaapp:{{ build }}
+            kubectl create deployment firstReactApp --image=ganesh01devops/firstReactApp:{{ build }}
          else 
             echo "Deploying firstReactApp Application"
-            kubectl create deployment firstReactApp --image=ganesh01devops/samplejavaapp:{{ build }}
+            kubectl create deployment firstReactApp --image=ganesh01devops/firstReactApp:{{ build }}
          fi
     - name: deploying service
       shell: |
