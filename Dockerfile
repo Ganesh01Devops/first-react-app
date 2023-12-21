@@ -31,3 +31,6 @@ COPY --from=builder /build /usr/share/nginx/html
 
 # Copying our nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+WORKDIR /usr/share/nginx/html
+EXPOSE 3030
