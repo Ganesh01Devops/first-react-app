@@ -3,23 +3,23 @@
   tasks: 
     - name: Deploying Application pods...
       shell: | 
-         if [ `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep firstReactApp | wc -l` -gt 0 ]; then  
+         if [ `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep first-react-app | wc -l` -gt 0 ]; then  
             echo "deleteing previous application deployment"
-            kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep firstReactApp`
+            kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep first-react-app`
             echo "creating new application deployment"
-            kubectl create deployment firstReactApp --image=ganesh01devops/firstReactApp:{{ build }}
+            kubectl create deployment first-react-app --image=ganesh01devops/first-react-app:{{ build }}
          else 
-            echo "Deploying firstReactApp Application"
-            kubectl create deployment firstReactApp --image=ganesh01devops/firstReactApp:{{ build }}
+            echo "Deploying first-react-app Application"
+            kubectl create deployment first-react-app --image=ganesh01devops/first-react-app:{{ build }}
          fi
     - name: deploying service
       shell: |
-         if [ `kubectl get svc | grep firstReactApp  | awk '{print $1}' | wc -l` -gt 0 ]; then
+         if [ `kubectl get svc | grep first-react-app  | awk '{print $1}' | wc -l` -gt 0 ]; then
             echo "app service found, No actions taken"
-            #kubectl delete svc `kubectl get svc | grep firstReactApp | awk '{print $1}'`
+            #kubectl delete svc `kubectl get svc | grep first-react-app | awk '{print $1}'`
          else
             echo "Creating App Services"
-            kubectl expose deployment firstReactApp --name firstReactApp --type NodePort --port 80 --target-port 8080
+            kubectl expose deployment first-react-app --name first-react-app --type NodePort --port 80 --target-port 8080
          fi
     - name: increase replicas 
-      shell: kubectl scale deploy firstReactApp --replicas=2
+      shell: kubectl scale deploy first-react-app --replicas=2
