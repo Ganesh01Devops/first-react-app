@@ -34,3 +34,4 @@ COPY build /usr/share/nginx/html
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 WORKDIR /usr/share/nginx/html
 EXPOSE 3030
+ENTRYPOINT ["nginx","-g","daemin off;"]
