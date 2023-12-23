@@ -15,7 +15,7 @@ WORKDIR .
 
 # Installing dependencies
 COPY package.json .
-COPY yarn.json .
+COPY yarn.lock .
 RUN yarn install
 
 # Copying all the files in our project
