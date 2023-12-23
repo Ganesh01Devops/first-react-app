@@ -19,7 +19,7 @@
             #kubectl delete svc `kubectl get svc | grep first-react-app | awk '{print $1}'`
          else
             echo "Creating App Services"
-            kubectl expose deployment first-react-app --name first-react-app --type NodePort --port 80 --target-port 8080
+            kubectl expose deployment first-react-app --name first-react-app --type NodePort --port 80 --target-port 3030
          fi
     - name: increase replicas 
       shell: kubectl scale deploy first-react-app --replicas=2
