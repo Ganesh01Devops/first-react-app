@@ -14,27 +14,24 @@ FROM node:17-alpine as builder
 WORKDIR .
 
 # Installing dependencies
-COPY package.json .
-COPY yarn.lock .
-RUN yarn install
+COPY ./package.json ./
+RUN npm install
 
 # Copying all the files in our project
 COPY . .
 
 # Building our application
-RUN yarn build
+RUN npm run build
 
 # Fetching the latest nginx image
-FROM nginx:1.19.0
-WORKDIR /usr/share/nginx/html
-RUN rm -rf ./*
-
+FROM nginx:1.13.5-alpine
+COPY build /usr/share/nginx/html
 # Copying built assets from builder
-COPY --from=builder /build .
+#COPY --from=builder /build /usr/share/nginx/html
 
 # Copying our nginx.conf
 #COPY nginx.conf /etc/nginx/conf.d/default.conf
-#COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 3030 
-ENTRYPOINT ["nginx",  "-g","daemon off;"]
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+WORKDIR /usr/share/nginx/html
+EXPOSE 3030
+ENTRYPOINT ["nginx","-g","daemon off;"]
